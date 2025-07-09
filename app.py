@@ -4,7 +4,9 @@ import pickle
 import os
 import gdown
 
-def download_file_from_drive(file_id, filename):
+def download_similarity_pickle():
+    file_id = "1Ui87sVy5QpTBeZUdMVx7wdWTGNTyqIX4"
+    filename = "similarity.pkl"
     if not os.path.exists(filename):
         url = f"https://drive.google.com/uc?id={file_id}"
         gdown.download(url, filename, quiet=False)
@@ -29,8 +31,6 @@ def recommend(movie):
         recommended_movie_names.append(movies.iloc[i[0]].title)
 
     return recommended_movie_names, recommended_movie_posters
-
-download_file_from_drive("1Ui87sVy5QpTBeZUdMVx7wdWTGNTyqIX4", "similarity.pkl")
 
 st.title('Movie Recommender System')
 movies = pickle.load(open('movie_list.pkl', 'rb'))
