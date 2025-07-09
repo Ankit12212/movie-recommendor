@@ -1,6 +1,15 @@
 import requests
 import streamlit as st
 import pickle
+import os
+
+def download_file(url, filename):
+    if not os.path.exists(filename):
+        st.info(f"Downloading {filename}...")
+        response = requests.get(url)
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+        st.success(f"{filename} downloaded.")
 
 def fetch_poster(movie_id):
     url = "https://api.themoviedb.org/3/movie/{}?api_key=60b7a515176b5184f3c8c9426b676b19&language=en-US".format(
@@ -23,6 +32,10 @@ def recommend(movie):
 
     return recommended_movie_names, recommended_movie_posters
 
+download_file(
+    "https://drive.google.com/uc?export=download&id=1Ui87sVy5QpTBeZUdMVx7wdWTGNTyqIX4",
+    "similarity.pkl"
+)
 st.title('Movie Recommender System')
 movies = pickle.load(open('movie_list.pkl', 'rb'))
 similarity = pickle.load(open('similarity.pkl', 'rb'))

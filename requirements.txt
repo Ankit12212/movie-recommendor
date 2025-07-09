@@ -5,3 +5,4 @@ requests
 starlette
 fastapi
 uvicorn
+os
