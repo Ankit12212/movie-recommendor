@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 requests
-starlette
 fastapi
 uvicorn
-os
+httpx
